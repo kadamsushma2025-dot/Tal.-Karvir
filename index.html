@@ -11,30 +11,39 @@
         <link href="resources/photon-geocoder-autocomplete.min.css" rel="stylesheet">
         <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
         <link rel="stylesheet" href="./resources/qgis2web.css">
-        <style>
-        html, body {
-            background-color: #ffffff;
-        }
-        .ol-control > * {
-            background-color: #f8f8f8!important;
-            color: #444444!important;
-            border-radius: 0px;
-        }
-        .ol-attribution a, .gcd-gl-input::placeholder, .search-layer-input-search::placeholder {
-            color: #444444!important;
-        }
-        .search-layer-input-search {
-            background-color: #f8f8f8!important;
-        }
-        .ol-control > *:focus, .ol-control >*:hover {
-            background-color: rgba(248, 248, 248, 0.7)!important;
-        } 
-        .ol-control {
-            background-color: rgba(255,255,255,.4) !important;
-            padding: 2px !important;
-        } 
-        </style>
-    
+        <style> 
+        </* Title Box Overlay */
+.map-title-box {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,0,0,0.15);
+    text-align: center;
+}
+.map-title-box h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #1a252f;
+    font-weight: bold;
+}
+
+/* Scale Line Styling */
+.ol-scale-line {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 4px !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    padding: 3px 8px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+}>
         <style> 
             html, body {
     width: 100%;
