@@ -155,168 +155,132 @@ map.addControl(scaleLine);
         <script src="./resources/qgis2web.js"></script>
     </body> 
 </html> 
-<var scaleLineControl = new ol.control.ScaleLine({
-    index.html
-    <!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="./resources/ol.css">
-        <link rel="stylesheet" href="resources/fontawesome-all.min.css">
-        <link rel="stylesheet" href="./resources/ol-layerswitcher.css">
-        <link rel="stylesheet" href="./resources/qgis2web.css">
-        
-        <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taluka Karvir Map</title>
 
-        #map {
-            width: 100vw;
-            height: 100vh;
-            padding: 0;
-            margin: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
 
-        /* 1. Professional Title Box (Top Center) */
-        .map-title-box {
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2000;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 8px 22px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-            border: 1px solid rgba(0,0,0,0.15);
-            text-align: center;
-        }
-        .map-title-box h2 {
-            margin: 0;
-            font-size: 18px;
-            color: #1a252f;
-            font-weight: bold;
-        }
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
 
-        /* 2. North Arrow Box (Top Right) */
-        .north-arrow-box {
-            position: absolute;
-            top: 15px;
-            right: 65px;
-            z-index: 2000;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 6px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            border: 1px solid rgba(0,0,0,0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .north-arrow-box svg {
-            width: 26px;
-            height: 26px;
-        }
-        .north-arrow-box span {
-            font-size: 10px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
 
-        /* 3. Zoom Controls (Top Left) */
-        .ol-zoom {
-            top: 15px !important;
-            left: 15px !important;
-            z-index: 2000 !important;
-        }
-        .ol-zoom button {
-            background-color: #2c3e50 !important;
-            color: #ffffff !important;
-            border-radius: 4px !important;
-        }
+    /* Title - bottom left */
+    .map-title {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      z-index: 1000;
+      background: white;
+      padding: 10px 14px;
+      border: 1px solid #777;
+      border-radius: 5px;
+      font-size: 17px;
+      font-weight: bold;
+      color: #222;
+      box-shadow: 0 1px 5px #888;
+    }
 
-        /* 4. Layer Switcher / Index (Bottom Left) */
-        .layer-switcher {
-            top: auto !important;
-            bottom: 25px !important;
-            left: 15px !important;
-            right: auto !important;
-            z-index: 2000 !important;
-        }
+    /* Legend / Index */
+    .map-legend {
+      background: white;
+      padding: 10px 12px;
+      border-radius: 5px;
+      border: 1px solid #777;
+      box-shadow: 0 1px 5px #888;
+      line-height: 1.7;
+      font-size: 12px;
+    }
 
-        /* 5. Scale Line (Bottom Right) */
-        .ol-scale-line {
-            background: rgba(255, 255, 255, 0.9) !important;
-            border-radius: 4px !important;
-            bottom: 15px !important;
-            right: 15px !important;
-            left: auto !important;
-            padding: 3px 8px !important;
-            color: #000 !important;
-            font-weight: bold !important;
-            z-index: 2000 !important;
-        }
-        </style>
-        <title>Karvir Taluka Map</title>
-    </head>
-    <body>
-        <!-- Header Title -->
-        <div class="map-title-box">
-            <h2>KARVIR TALUKA MAP</h2>
+    .map-legend h4 {
+      margin: 0 0 5px;
+      font-size: 14px;
+    }
+
+    .legend-color {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      margin-right: 6px;
+      vertical-align: middle;
+      border: 1px solid #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <!-- Map title -->
+  <div class="map-title">
+    Taluka Karvir – Thematic Map
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    // Initialize map
+    const map = L.map('map').setView([16.70, 74.25], 10);
+
+    // OpenStreetMap base map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // SCALE BAR - bottom left
+    L.control.scale({
+      position: 'bottomleft',
+      imperial: false,
+      metric: true,
+      maxWidth: 150
+    }).addTo(map);
+
+    // INDEX / LEGEND - bottom left
+    const legend = L.control({ position: 'bottomleft' });
+
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'map-legend');
+
+      div.innerHTML = `
+        <h4>INDEX / LEGEND</h4>
+        <div>
+          <span class="legend-color"
+                style="background:#c74735"></span>
+          Class 1
         </div>
-
-        <!-- SVG North Arrow -->
-        <div class="north-arrow-box">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="50,5 20,90 50,70" fill="#2c3e50"/>
-                <polygon points="50,5 80,90 50,70" fill="#e74c3c"/>
-            </svg>
-            <span>N</span>
+        <div>
+          <span class="legend-color"
+                style="background:#f2a52b"></span>
+          Class 2
         </div>
-
-        <!-- Map Container -->
-        <div id="map">
-            <div id="popup" class="ol-popup">
-                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                <div id="popup-content"></div>
-            </div>
+        <div>
+          <span class="legend-color"
+                style="background:#e6d95c"></span>
+          Class 3
         </div>
+      `;
 
-        <script src="resources/qgis2web_expressions.js"></script>
-        <script src="resources/polyglot.min.js"></script>
-        <script src="resources/ol.js"></script>
-        <script src="resources/ol-layerswitcher.js"></script>
-        <script src="layers/karvir_clipclipped_2.js"></script>
-        <script src="styles/karvir_clipclipped_2_style.js"></script>
-        <script src="./resources/qgis2web.js"></script>
+      return div;
+    };
 
-        <!-- Forcefully reposition components after qgis2web script execution -->
-        <script>
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                // Add Scale Line explicitly
-                if (typeof map !== 'undefined') {
-                    var scaleLineControl = new ol.control.ScaleLine({
-                        units: 'metric',
-                        minWidth: 100
-                    });
-                    map.addControl(scaleLineControl);
-                }
-            }, 500);
-        });
-        </script>
-    </body>
+    legend.addTo(map);
+  </script>
+</body>
 </html>
