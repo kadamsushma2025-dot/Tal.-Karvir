@@ -52,13 +52,76 @@
     position: absolute;
     top: 0;
     left: 0;
-} 
+}
+            /* North Arrow Box Styling (Top Right) */
+.north-arrow-box {
+    position: absolute;
+    top: 15px;
+    right: 65px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 6px 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.north-arrow-box svg {
+    width: 28px;
+    height: 28px;
+}
+.north-arrow-box span {
+    font-size: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+            // Add Scale Line Control to Map
+var scaleLine = new ol.control.ScaleLine({
+    units: 'metric',
+    bar: true,
+    steps: 4,
+    text: true,
+    minWidth: 100
+});
+map.addControl(scaleLine);
+
+/* Layer Switcher / Index Positioning (Bottom Left) */
+.layer-switcher {
+    top: auto !important;
+    bottom: 25px !important;
+    left: 15px !important;
+    right: auto !important;
+    z-index: 1000 !important;
+}
+
+/* Scale Line Styling (Bottom Right) */
+.ol-scale-line {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 4px !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    left: auto !important;
+    padding: 4px 8px !important;
+    color: #000 !important;
+    font-weight: bold !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+}
         </style>
         <title></title>
     </head>
-    <body>
+    <body> 
+        <!-- Floating North Arrow -->
+<div class="north-arrow-box">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,5 20,90 50,70" fill="#2c3e50"/>
+        <polygon points="50,5 80,90 50,70" fill="#e74c3c"/>
+    </svg>
+    <span>N</span>
+</div>
         <div id="map">
-            <div id="popup" class="ol-popup">
+            <div id="popup" class="ol-popup"> 
                 <a href="#" id="popup-closer" class="ol-popup-closer"></a>
                 <div id="popup-content"></div>
             </div>
@@ -74,5 +137,5 @@
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script> 
         <script src="./resources/qgis2web.js"></script>
-    </body>
-</html>
+    </body> 
+</html> 
