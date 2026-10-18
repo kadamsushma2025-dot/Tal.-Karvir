@@ -125,7 +125,9 @@ map.addControl(scaleLine);
         </style>
         <title></title>
     </head>
-    <body> 
+    <<div class="map-title-box">
+    <h2>KARVIR TALUKA MAP</h2>
+    </div>> 
         <!-- Floating North Arrow -->
 <div class="north-arrow-box">
     <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -153,3 +155,9 @@ map.addControl(scaleLine);
         <script src="./resources/qgis2web.js"></script>
     </body> 
 </html> 
+<var scaleLineControl = new ol.control.ScaleLine({
+    units: 'metric',
+    minWidth: 100
+});
+map.addControl(scaleLineControl);> 
+    
