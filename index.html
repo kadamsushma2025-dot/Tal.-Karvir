@@ -284,3 +284,114 @@ map.addControl(scaleLine);
   </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karvir Taluka Leaflet Map</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com" />
+
+    <style>
+        /* फुल स्क्रीन मॅपसाठी CSS */
+        html, body, #map {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 1. CENTER TITLE CSS */
+        .map-title {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* मॅपच्या वर दिसण्यासाठी */
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            pointer-events: none; /* टायटलवर क्लिक केल्यास मॅप हलवता यावा */
+        }
+
+        /* 2. INDEX / LEGEND (BOTTOM-LEFT) CSS */
+        .legend {
+            background: white;
+            padding: 10px;
+            line-height: 18px;
+            color: #555;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+        .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- १. सेंटर टायटल डिव्ह (Title HTML) -->
+    <div class="map-title">Taluka Karvir – Thematic Map</div>
+
+    <!-- मॅप कंटेनर -->
+    <div id="map"></div>
+
+    <!-- Leaflet JavaScript -->
+    <script href="https://unpkg.com"></script>
+    <script>
+        // मॅप सुरू करा (कोल्हापूर/करवीर लोकेशन सेंटर सेट केले आहे)
+        var map = L.map('map').setView([16.7050, 74.2433], 11);
+
+        // OpenStreetMap बॅकग्राउंड लेयर जोडा
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // ==========================================
+        // 1. SCALE BAR ADD करणे (Bottom-Left)
+        // ==========================================
+        L.control.scale({
+            position: 'bottomleft',
+            metric: true,       // किमी (km) दाखवण्यासाठी
+            imperial: false     // मैल (miles) बंद करण्यासाठी
+        }).addTo(map);
+
+        // ==========================================
+        // 2. INDEX / LEGEND ADD करणे (Bottom-Left)
+        // ==========================================
+        var legend = L.control({position: 'bottomleft'});
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            
+            // इंडेक्सचे हेडिंग
+            div.innerHTML += '<h4>Index / सूची</h4>';
+            
+            // तुमच्या थिमॅटिक मॅपनुसार इथे रंग आणि नावे बदला
+            // उदाहरणासाठी खाली ३ कॅटेगरी दिल्या आहेत:
+            div.innerHTML += '<i style="background: #E31A1C"></i> High Density / जास्त घनता<br>';
+            div.innerHTML += '<i style="background: #FC4E2A"></i> Medium Density / मध्यम घनता<br>';
+            div.innerHTML += '<i style="background: #FEB24C"></i> Low Density / कमी घनता<br>';
+            
+            return div;
+        };
+
+        legend.addTo(map);
+    </script>
+</body>
+</html>
