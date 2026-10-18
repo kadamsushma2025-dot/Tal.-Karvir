@@ -34,7 +34,7 @@
             padding: 2px !important;
         } 
         </style>
-
+    
         <style> 
             html, body {
     width: 100%;
@@ -88,12 +88,17 @@ var scaleLine = new ol.control.ScaleLine({
 map.addControl(scaleLine);
 
 /* Layer Switcher / Index Positioning (Bottom Left) */
-.layer-switcher {
-    top: auto !important;
-    bottom: 25px !important;
-    left: 15px !important;
-    right: auto !important;
-    z-index: 1000 !important;
+/* Custom Container for Index at Bottom-Left */
+#custom-layer-switcher {
+    position: absolute;
+    bottom: 25px;
+    left: 15px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
 }
 
 /* Scale Line Styling (Bottom Right) */
